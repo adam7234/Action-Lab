@@ -1,7 +1,7 @@
 title: Action Lab
 description: Emotional intelligence for young men trying to get focused, handle pressure, and turn self-awareness into action.
 url: "https://www.actionlab.org" # change later to your real domain
-baseurl: /Action-Lab # leave empty if the site lives at the root domain
+baseurl: "/Action-Lab" # leave empty if the site lives at the root domain
 timezone: America/New_York
 
 markdown: kramdown
