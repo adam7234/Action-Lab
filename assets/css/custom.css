@@ -1,415 +1,502 @@
 /* -------------------------------------------------
-   Blueprint Maintenance Services — Pro Theme
+   Action Lab — Custom Theme
+   Black + white base. Sage green signals hope.
    Paste into: assets/css/custom.css
 -------------------------------------------------- */
 
-:root{
-  --bg: #0b1220;
-  --surface: #0f1a2e;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap');
 
-  --ink: #0f172a;
-  --muted: rgba(15,23,42,0.70);
+:root {
+  /* Core palette */
+  --black:        #0d0d0d;
+  --ink:          #1a1a1a;
+  --muted:        rgba(26,26,26,0.55);
+  --surface:      #f5f5f3;
+  --white:        #ffffff;
 
-  --brand: #1e40af;        /* deep blueprint blue */
-  --brand-hover: #1e3a8a;  /* deeper on hover */
-  --brand-2: #6366f1;      /* vibrant indigo accent */
-  --success: #059669;
+  /* The accent — sage green = hope, agency, movement */
+  --brand:        #5a7f6a;
+  --brand-light:  #8aad96;
+  --brand-dim:    rgba(90,127,106,0.12);
+  --brand-hover:  #486658;
 
-  --ring: rgba(30,64,175,.20);
-  --radius: 18px;
+  /* Supporting */
+  --border:       rgba(26,26,26,0.10);
+  --border-mid:   rgba(26,26,26,0.18);
+  --ring:         rgba(90,127,106,0.22);
+  --radius:       14px;
+  --radius-sm:    8px;
 }
 
-/* Base */
-html, body{ height: 100%; }
-body{
+/* -------------------------------------------------
+   Base
+-------------------------------------------------- */
+html, body { height: 100%; }
+
+body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--ink);
-  background: #ffffff;
+  background: var(--white);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6, .display-5, .navbar-brand{
+h1, h2, h3, h4, h5, h6,
+.display-5, .navbar-brand {
   font-family: 'Outfit', 'Inter', sans-serif;
-  letter-spacing: -.02em;
   font-weight: 700;
-}
-/* Hero lead copy: sharper, more professional */
-.lead{
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 1.05rem;          /* slightly tighter than default */
-  line-height: 1.58;           /* crisper than 1.7 */
-  color: rgba(15,23,42,.82);   /* darker = more “pro” */
-  max-width: 56ch;             /* prevents overly long lines */
+  letter-spacing: -0.025em;
+  color: var(--black);
 }
 
-/* Optional: make hero paragraph even tighter without affecting other leads */
-.hero .lead{
-  font-size: 1.04rem;
-  line-height: 1.55;
+.lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(26,26,26,0.75);
   max-width: 58ch;
 }
 
-/* Optional: add a “lead-strong” class to bold the first sentence */
-.lead-strong{
-  font-weight: 600;
-  color: rgba(15,23,42,.90);
-}
+p { line-height: 1.7; }
 
-/* Focus ring */
-a:focus, .btn:focus, .form-control:focus{
-  box-shadow: 0 0 0 .25rem var(--ring) !important;
+hr { border-color: var(--border); opacity: 1; }
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover { color: var(--brand-hover); }
+
+a:focus, .btn:focus, .form-control:focus {
+  box-shadow: 0 0 0 3px var(--ring) !important;
   outline: none;
 }
 
 /* -------------------------------------------------
    Navbar
 -------------------------------------------------- */
-
-/* Default (light) navbar */
-.navbar{
-  background: rgba(255,255,255,0.95) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(15,23,42,.06) !important;
+.navbar {
+  background: rgba(255,255,255,0.96) !important;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border) !important;
   position: relative;
   z-index: 9999;
 }
 
-.navbar-brand{
-  letter-spacing: -.01em;
-  font-weight: 600;
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--black) !important;
+  letter-spacing: -0.02em;
 }
 
-.nav-link{
-  color: rgba(15,23,42,.75) !important;
+/* Brand dot — a single sage green pulse on the logo */
+.navbar-brand span.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  margin-left: 3px;
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+
+.nav-link {
+  color: rgba(26,26,26,0.65) !important;
   font-weight: 500;
+  font-size: 0.92rem;
   transition: color 0.2s ease;
 }
-.nav-link:hover{
-  color: var(--brand) !important;
-}
+.nav-link:hover { color: var(--black) !important; }
+.nav-link.active { color: var(--brand) !important; }
 
-/* Tinted/Dark navbar option
-   Use: <nav class="navbar navbar-expand-lg navbar-tinted sticky-top">
-*/
-.navbar.navbar-tinted{
-  background: radial-gradient(900px 500px at 20% 0%, rgba(99,102,241,.22), transparent 60%),
-              linear-gradient(180deg, rgba(11,18,32,.92), rgba(11,18,32,.86)) !important;
-  border-bottom: 1px solid rgba(255,255,255,.10) !important;
-}
-
-.navbar.navbar-tinted .navbar-brand,
-.navbar.navbar-tinted .nav-link{
-  color: rgba(255,255,255,.86) !important;
-}
-
-.navbar.navbar-tinted .nav-link:hover{
-  color: rgba(255,255,255,1) !important;
-}
-
-.navbar-toggler{
-  border-color: rgba(15,23,42,.18);
-}
-.navbar-toggler-icon{
-  background-image: var(--bs-navbar-toggler-icon-bg);
-}
-
-/* Ensure toggler visible on tinted nav */
-.navbar.navbar-tinted .navbar-toggler{
-  border-color: rgba(255,255,255,.25);
-}
-.navbar.navbar-tinted .navbar-toggler-icon{
-  filter: invert(1);
-}
+.navbar-toggler { border-color: var(--border-mid); }
 
 /* -------------------------------------------------
    Buttons
 -------------------------------------------------- */
-.btn{
+.btn {
   font-family: 'Outfit', 'Inter', sans-serif;
-  border-radius: 12px;
   font-weight: 600;
-  letter-spacing: -.01em;
+  border-radius: var(--radius-sm);
+  letter-spacing: -0.01em;
   transition: all 0.2s ease;
 }
 
-.btn-primary{
+.btn-primary {
+  background: var(--black);
+  border: none;
+  color: var(--white);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.btn-primary:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.20);
+  color: var(--white);
+}
+.btn-primary:active { transform: translateY(0); }
+
+/* Green CTA — use sparingly for the highest-intent action */
+.btn-action {
   background: var(--brand);
   border: none;
-  color: white;
-  box-shadow: 0 2px 8px rgba(30,64,175,.25),
-              0 1px 2px rgba(30,64,175,.15);
+  color: var(--white);
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.75rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(90,127,106,0.25);
 }
-.btn-primary:hover{
+.btn-action:hover {
   background: var(--brand-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(30,64,175,.30),
-              0 2px 4px rgba(30,64,175,.20);
+  box-shadow: 0 6px 18px rgba(90,127,106,0.30);
+  color: var(--white);
 }
-.btn-primary:active{ transform: translateY(0); }
+.btn-action:active { transform: translateY(0); }
 
-.btn-outline-primary{
-  border: 1.5px solid var(--brand);
-  color: var(--brand);
+.btn-outline-primary {
+  border: 1.5px solid var(--black);
+  color: var(--black);
   background: transparent;
 }
-.btn-outline-primary:hover{
-  background: var(--brand);
-  color: white;
-  border-color: var(--brand);
+.btn-outline-primary:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
 }
 
-.btn-outline-secondary{
-  border: 1.5px solid rgba(15,23,42,.18);
-  color: rgba(15,23,42,.80);
+.btn-outline-secondary {
+  border: 1.5px solid var(--border-mid);
+  color: rgba(26,26,26,0.72);
   background: transparent;
 }
-.btn-outline-secondary:hover{
-  border-color: rgba(15,23,42,.30);
-  background: rgba(15,23,42,.05);
+.btn-outline-secondary:hover {
+  border-color: rgba(26,26,26,0.35);
+  background: rgba(26,26,26,0.04);
   color: var(--ink);
 }
 
-.btn-sm{ padding: 0.45rem 0.9rem; }
-.btn-lg{ padding: 0.85rem 2rem; font-size: 1.05rem; }
+.btn-sm  { padding: 0.4rem 0.85rem; font-size: 0.875rem; }
+.btn-lg  { padding: 0.85rem 2rem; font-size: 1rem; }
 
 /* -------------------------------------------------
    Badges / chips
 -------------------------------------------------- */
-.badge-soft{
-  background: rgba(30,64,175,.08);
-  color: var(--brand);
-  border: 1px solid rgba(30,64,175,.12);
+.badge-soft {
+  background: rgba(26,26,26,0.06);
+  color: rgba(26,26,26,0.72);
+  border: 1px solid var(--border);
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
 }
 
-.badge.text-bg-light{
-  background: rgba(15,23,42,.06) !important;
-  color: rgba(15,23,42,.75) !important;
-  border: 1px solid rgba(15,23,42,.12);
+/* Sage accent badge — for key callouts */
+.badge-accent {
+  background: var(--brand-dim);
+  color: var(--brand-hover);
+  border: 1px solid rgba(90,127,106,0.20);
   font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.8rem;
 }
 
-.project-img {
-  width: 100%;
-  /* Force a square or specific rectangle */
-  aspect-ratio: 1 / 1; 
-  /* This prevents the image from looking squashed */
-  object-fit: cover; 
-  /* Optional: keeps the focus on the center of the photo */
-  object-position: center;
+.badge.text-bg-light {
+  background: rgba(26,26,26,0.06) !important;
+  color: rgba(26,26,26,0.72) !important;
+  border: 1px solid var(--border);
+  font-weight: 600;
 }
 
 /* -------------------------------------------------
-   Hero section (adds “pop” while staying clean)
-   Use: <section class="py-5 hero">
+   Hero
 -------------------------------------------------- */
-.hero{
-  background:
-    radial-gradient(1400px 700px at 10% 0%, rgba(30,64,175,.12), transparent 60%),
-    radial-gradient(900px 600px at 90% 20%, rgba(99,102,241,.14), transparent 55%),
-    linear-gradient(180deg, rgba(249,250,251,1), rgba(255,255,255,1));
-  border-bottom: 1px solid rgba(15,23,42,.06);
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
 }
 
-.hero .badge-soft{
-  background: rgba(255,255,255,.70);
-  border: 1px solid rgba(15,23,42,.10);
-  color: rgba(15,23,42,.80);
+/* Subtle sage wash in the upper corner — color bleeding into white */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -180px;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(90,127,106,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero .badge-soft {
+  background: rgba(255,255,255,0.80);
+  border: 1px solid var(--border);
+  color: rgba(26,26,26,0.70);
+}
+
+.hero-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sage top-bar on the hero card — the color appears as you engage */
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-light));
 }
 
 /* -------------------------------------------------
    Cards
 -------------------------------------------------- */
-.hero-card{
-  border: 1px solid rgba(15,23,42,.08);
+.card-pro {
   border-radius: var(--radius);
-  box-shadow: 0 20px 60px rgba(2,6,23,.08);
-  position: relative;
-  overflow: hidden;
-  background: #fff;
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: all 0.25s ease;
 }
-.hero-card::before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--brand), var(--brand-2));
-}
-
-.card-pro{
-  border-radius: var(--radius);
-  border: 1px solid rgba(15,23,42,.08);
-  background: #fff;
-  box-shadow: 0 12px 40px rgba(2,6,23,.06);
-  transition: all 0.3s ease;
-}
-.card-pro:hover{
-  box-shadow: 0 16px 50px rgba(2,6,23,.10);
+.card-pro:hover {
+  border-color: var(--brand-light);
+  box-shadow: 0 6px 24px rgba(90,127,106,0.10);
   transform: translateY(-2px);
 }
 
-.card-pro .kicker{
-  font-size: .78rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--brand-2);
-  font-weight: 700;
+/* Simple bordered blocks */
+.border.rounded-3 {
+  border-color: var(--border) !important;
+  transition: all 0.25s ease;
 }
-.card-pro .title{
-  font-weight: 700;
-  font-size: 1.05rem;
-  margin: 0;
-  color: var(--ink);
-}
-.card-pro .desc{
-  color: rgba(15,23,42,.70);
-  margin: 0;
-  line-height: 1.6;
+.border.rounded-3:hover {
+  border-color: rgba(90,127,106,0.35) !important;
+  box-shadow: 0 4px 14px rgba(90,127,106,0.08);
+  transform: translateY(-1px);
 }
 
-/* Make your simple bordered blocks feel nicer */
-.border.rounded-3{
-  border-color: rgba(15,23,42,.08) !important;
-  transition: all 0.3s ease;
-}
-.border.rounded-3:hover{
-  border-color: rgba(30,64,175,.25) !important;
-  box-shadow: 0 4px 12px rgba(30,64,175,.08);
-  transform: translateY(-2px);
+/* Step number chips */
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-dim);
+  color: var(--brand-hover);
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'Outfit', sans-serif;
 }
 
 /* -------------------------------------------------
-   Section surfaces (your “bands”)
+   Section surfaces
 -------------------------------------------------- */
-.surface{
-  background: radial-gradient(1400px 700px at 15% 0%, rgba(99,102,241,.06), transparent 65%),
-              radial-gradient(1000px 600px at 85% 30%, rgba(30,64,175,.05), transparent 60%),
-              rgba(249,250,251,1);
-  border-top: 1px solid rgba(15,23,42,.06);
-  border-bottom: 1px solid rgba(15,23,42,.06);
+.bg-light {
+  background: var(--surface) !important;
 }
-.bg-light{ background: rgba(249,250,251,1) !important; }
+
+.surface {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* A full black section — for a strong moment on the page */
+.section-dark {
+  background: var(--black);
+  color: rgba(255,255,255,0.88);
+}
+.section-dark h2,
+.section-dark h3 {
+  color: var(--white);
+}
+.section-dark p,
+.section-dark .text-secondary {
+  color: rgba(255,255,255,0.62) !important;
+}
+/* Sage pops on dark background */
+.section-dark .accent {
+  color: var(--brand-light);
+}
+.section-dark .badge-accent {
+  background: rgba(90,127,106,0.20);
+  color: var(--brand-light);
+  border-color: rgba(90,127,106,0.30);
+}
+
+/* -------------------------------------------------
+   Trust strip / icon rows
+-------------------------------------------------- */
+.trust-item .fw-bold {
+  color: var(--black);
+  font-size: 0.875rem;
+}
+.trust-item .text-secondary {
+  font-size: 0.8rem;
+  color: var(--muted) !important;
+}
+
+/* Sage left-border accent on trust items */
+.trust-item {
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--brand);
+}
+
+/* -------------------------------------------------
+   Kicker labels (section eyebrows)
+-------------------------------------------------- */
+.kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* -------------------------------------------------
+   Pricing callout
+-------------------------------------------------- */
+.price-tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.03em;
+}
+.price-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-left: 6px;
+}
+
+/* -------------------------------------------------
+   Forms
+-------------------------------------------------- */
+.form-control, .form-select {
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+.form-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
 
 /* -------------------------------------------------
    Footer
 -------------------------------------------------- */
-.site-footer{
-  background: radial-gradient(1200px 600px at 10% 0%, rgba(30,64,175,.15), transparent 60%),
-              radial-gradient(900px 500px at 90% 20%, rgba(99,102,241,.12), transparent 60%),
-              var(--bg);
-  color: rgba(255,255,255,.92);
+.site-footer {
+  background: var(--black);
+  color: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
-.site-footer .text-muted{
-  color: rgba(255,255,255,.68) !important;
+.site-footer .text-muted {
+  color: rgba(255,255,255,0.48) !important;
 }
 
-.footer-title{
+.footer-title {
   font-weight: 700;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-size: .78rem;
-  color: rgba(255,255,255,.75);
-  margin-bottom: .75rem;
-}
-
-.footer-links a{
-  display: inline-block;
-  padding: .3rem 0;
-  color: rgba(255,255,255,.80);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.footer-links a:hover{ color: var(--brand-2); }
-
-.footer-contact{
-  color: rgba(255,255,255,.88);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.footer-contact:hover{ color: var(--brand-2); }
-
-.footer-legal{
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-}
-.footer-legal:hover{ color: rgba(255,255,255,1); }
-
-.footer-hr{ border-color: rgba(255,255,255,.14); }
-
-.footer-mark{
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  object-fit: contain;
-  background: rgba(255,255,255,.10);
-  border: 1px solid rgba(255,255,255,.14);
-}
-
-.footer-btn{
-  border-radius: 12px;
-  border-color: rgba(255,255,255,.22) !important;
-  transition: all 0.2s ease;
-}
-.footer-btn:hover{
-  border-color: var(--brand-2) !important;
-  background: rgba(99,102,241,.15) !important;
-}
-
-/* Fonts */
-body{
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--ink);
-  background: #ffffff;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-h1, h2, h3, h4, h5, h6, .display-5, .navbar-brand{
-  font-family: 'Outfit', 'Inter', sans-serif;
-  letter-spacing: -.02em;
-  font-weight: 700;
-}
-
-.btn{
-  font-family: 'Outfit', 'Inter', sans-serif;
-}
-
-/* Optional: subtle global smoothing */
-hr{ opacity: .12; }
-
-/* Content: subtle global smoothing */
-.content{
-  font-size: 18px;
-  line-height: 1.65;
-}
-
-.content p,
-.content ul,
-.content ol{
-  margin-bottom: 0.9rem;
-}
-
-.content h2{
-  margin-top: 2rem;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.50);
   margin-bottom: 0.75rem;
 }
 
-.content h3{
-  margin-top: 1.5rem;
-  margin-bottom: 0.6rem;
+.footer-links a {
+  display: inline-block;
+  padding: 0.25rem 0;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: var(--brand-light); }
+
+.footer-contact {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-contact:hover { color: var(--brand-light); }
+
+.footer-legal {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+.footer-legal:hover { color: rgba(255,255,255,0.80); }
+
+.footer-hr { border-color: rgba(255,255,255,0.10); }
+
+/* Sage accent in footer — a thread of hope at the bottom */
+.footer-accent-line {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--brand);
+  margin-bottom: 1rem;
+  border-radius: 2px;
 }
 
+/* -------------------------------------------------
+   Utility
+-------------------------------------------------- */
+.text-brand  { color: var(--brand) !important; }
+.bg-brand    { background: var(--brand) !important; }
+.border-brand{ border-color: var(--brand) !important; }
+
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-700 { font-weight: 700; }
+
+.project-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Content body (blog / long-form) */
+.content {
+  font-size: 18px;
+  line-height: 1.72;
+  color: var(--ink);
+}
+.content p,
 .content ul,
-.content ol{
-  padding-left: 1.2rem;
-}
+.content ol { margin-bottom: 1rem; }
+.content h2 { margin-top: 2.25rem; margin-bottom: 0.75rem; }
+.content h3 { margin-top: 1.75rem; margin-bottom: 0.6rem; }
+.content ul,
+.content ol { padding-left: 1.25rem; }
 
-@media (max-width: 600px){
-  .content{ font-size: 17px; }
+@media (max-width: 600px) {
+  .content { font-size: 17px; }
+  .price-tag { font-size: 1.85rem; }
 }
